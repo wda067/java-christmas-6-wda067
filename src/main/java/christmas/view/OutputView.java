@@ -41,4 +41,9 @@ public class OutputView {
             System.out.println(entry.getKey() + "-" + entry.getValue() + "원");
         }
     }
+
+    public void printTotalBenefitAmount(int amount) {
+        System.out.println("\n<총혜택 금액>");
+        System.out.println(amount);
+    }
 }
