@@ -46,4 +46,9 @@ public class OutputView {
         System.out.println("\n<총혜택 금액>");
         System.out.println(amount);
     }
+
+    public void printExpectedTotalAfterDiscount(int total, int discount) {
+        System.out.println("\n<할인 후 예상 결제 금액>");
+        System.out.println(total - discount);
+    }
 }
