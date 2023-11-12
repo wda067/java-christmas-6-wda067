@@ -24,4 +24,14 @@ public class OutputView {
         System.out.println("\n<할인 전 총주문 금액>");
         System.out.println(price + "원");
     }
+
+    public void printGiftMenu(boolean isProvided) {
+        System.out.println("\n<증정 메뉴>");
+        if (isProvided) {
+            System.out.println("샴페인 1개");
+        }
+        if (!isProvided) {
+            System.out.println("없음");
+        }
+    }
 }
