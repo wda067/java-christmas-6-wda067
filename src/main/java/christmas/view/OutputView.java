@@ -34,4 +34,11 @@ public class OutputView {
             System.out.println("없음");
         }
     }
+
+    public void printBenefitDetails(HashMap<String, Integer> benefitDetails) {
+        System.out.println("\n<혜택 내역>");
+        for (Entry<String, Integer> entry : benefitDetails.entrySet()) {
+            System.out.println(entry.getKey() + "-" + entry.getValue() + "원");
+        }
+    }
 }
