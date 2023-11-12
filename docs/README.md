@@ -7,8 +7,9 @@
   - [ ] 메뉴판 생성
   - [ ] 음료만 주문 시 예외 발생
   - [ ] 총 주문 개수가 20개를 초과할 시 예외 발생
-- [ ] 주문 메뉴를 순서 관계없이 출력하는 기능
-- [ ] 할인 전 총 주문 금액 출력하는 기능
+- [x] 주문 메뉴를 순서 관계없이 출력하는 기능 - OutputView#printOrderMenu()
+- [x] 할인 전 총 주문 금액 출력하는 기능 - OutputView#printTotalOrderAmountBeforeDiscount()
+  - [x] 할인 전 총 주문 금액을 계산하는 기능 - OrderService#calculateTotal()
   - [ ] 총 주문 금액이 1만 원 이상일 시 이벤트 적용 
   - [ ] 금액이 12만 원 이상이면 샴페인 1개 증정
 - [ ] 혜택 내역 출력 기능
