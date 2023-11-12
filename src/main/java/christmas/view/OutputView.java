@@ -19,4 +19,9 @@ public class OutputView {
             System.out.println(entry.getKey() + " " + entry.getValue() + "개");
         }
     }
+
+    public void printTotalOrderAmountBeforeDiscount(String price) {
+        System.out.println("\n<할인 전 총주문 금액>");
+        System.out.println(price + "원");
+    }
 }
