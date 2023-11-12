@@ -32,4 +32,10 @@ public class EventService {
         DayOfWeek dayOfWeek = date.getDayOfWeek();
         return dayOfWeek.getValue() == 5 || dayOfWeek.getValue() == 6;
     }
+
+    public boolean hasStarInCalendar(int day) {
+        LocalDate date = LocalDate.of(2023, 12, day);
+        DayOfWeek dayOfWeek = date.getDayOfWeek();
+        return dayOfWeek.getValue() == 7 || day == 25;
+    }
 }
