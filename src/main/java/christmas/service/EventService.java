@@ -33,6 +33,13 @@ public class EventService {
         return dayOfWeek.getValue() == 5 || dayOfWeek.getValue() == 6;
     }
 
+    public int calculateSpecialDiscount(int day) {
+        if (hasStarInCalendar(day)) {
+            return -1 * 1000;
+        }
+        return 0;
+    }
+
     public boolean hasStarInCalendar(int day) {
         LocalDate date = LocalDate.of(2023, 12, day);
         DayOfWeek dayOfWeek = date.getDayOfWeek();
