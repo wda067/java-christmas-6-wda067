@@ -57,4 +57,10 @@ public enum Menu {
                 .map(Menu::getName)
                 .collect(Collectors.toList());
     }
+
+    public static List<String> getNameList() {
+        return Arrays.stream(Menu.values())
+                .map(Menu::getName)
+                .collect(Collectors.toList());
+    }
 }
