@@ -30,4 +30,8 @@ public class OrderService {
     public int getTotal() {
         return total;
     }
+
+    public boolean isChampagneProvided(int total) {
+        return total >= 120_000;
+    }
 }
