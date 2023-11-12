@@ -18,4 +18,12 @@ public class EventService {
                 .sum();
         return (int) (-1 * (dessertCount * 2023));
     }
+
+    public int calculateWeekendDiscount(HashMap<String, Integer> map) {
+        long mainCount = map.keySet().stream()
+                .filter(name -> Menu.getMainList().contains(name))
+                .mapToInt(map::get)
+                .sum();
+        return (int) (-1 * (mainCount * 2023));
+    }
 }
