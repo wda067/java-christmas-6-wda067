@@ -8,7 +8,10 @@ import java.util.HashMap;
 public class EventService {
 
     public int calculateXmasDiscount(int day) {
-        return -1 * (1000 + (day - 1) * 100);
+        if (day <= 25) {
+            return -1 * (1000 + (day - 1) * 100);
+        }
+        return 0;
     }
 
     public int calculateWeekdayDiscount(HashMap<String, Integer> map) {
