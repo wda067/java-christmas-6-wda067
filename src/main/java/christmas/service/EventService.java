@@ -26,4 +26,10 @@ public class EventService {
                 .sum();
         return (int) (-1 * (mainCount * 2023));
     }
+
+    public boolean isWeekend(int day) {
+        LocalDate date = LocalDate.of(2023, 12, day);
+        DayOfWeek dayOfWeek = date.getDayOfWeek();
+        return dayOfWeek.getValue() == 5 || dayOfWeek.getValue() == 6;
+    }
 }
