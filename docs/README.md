@@ -1,31 +1,31 @@
 # 크리스마스 프로모션
 
 ## 기능 목록
-- [ ] 식당 방문 날짜를 입력 받는 기능
+- [x] 식당 방문 날짜를 입력 받는 기능 - InputView#inputVisitDate()
   - [ ] 1에서 31까지의 숫자인지 검증
-- [ ] 주문 메뉴와 개수를 입력 받는 기능
-  - [ ] 메뉴판 생성
+- [x] 주문 메뉴와 개수를 입력 받는 기능 - InputView#inputMenuAndCount()
+  - [x] 메뉴판 생성 - Menu
+  - [x] 입력받은 String을 Map으로 변환 - OrderService#convertStringToCollection()
   - [ ] 음료만 주문 시 예외 발생
   - [ ] 총 주문 개수가 20개를 초과할 시 예외 발생
 - [x] 주문 메뉴를 순서 관계없이 출력하는 기능 - OutputView#printOrderMenu()
 - [x] 할인 전 총 주문 금액 출력하는 기능 - OutputView#printTotalOrderAmountBeforeDiscount()
   - [x] 할인 전 총 주문 금액을 계산하는 기능 - OrderService#calculateTotal()
   - [ ] 총 주문 금액이 1만 원 이상일 시 이벤트 적용 
-  - [ ] 금액이 12만 원 이상이면 샴페인 1개 증정
-- [ ] 혜택 내역 출력 기능
-  - [ ] 크리스마스 디데이 할인
-    - [ ] 방문 날짜의 할인 금액 계산
-  - [ ] 평일/주말 할인
-    - [ ] 방문 날짜의 평일/주말 구문
-    - [ ] 평일에는 디저트 메뉴 할인
-    - [ ] 주말에는 메인 메뉴 할인
-  - [ ] 특별 할인
-    - [ ] 방문 날짜에 별이 있는지 여부 확인
-  - [ ] 증정 이벤트 할인
-- [ ] 총 혜택 금액 출력 기능
-- [ ] 할인 후 예상 결제 금액 출력 기능
-- [ ] 12월 이벤트 배지 출력 기능
-  - [ ] 총 혜택 금액에 따라 별/트리/산타 구분
+- [x] 증정 메뉴 출력 기능 - OutputView#printGiftMenu()
+  - [x] 금액이 12만 원 이상이면 샴페인 1개 증정 - OrderService#isChampagneProvided()
+- [x] 혜택 내역 출력 기능 - OutputView#printBenefitDetails()
+  - [x] 크리스마스 디데이 할인 - EventService#calculateXmasDiscount()
+  - [x] 방문 날짜의 평일/주말 구문 - EventService#isWeekend()
+    - [x] 평일에는 디저트 메뉴 할인 - EventService#calculateWeekdayDiscount()
+    - [x] 주말에는 메인 메뉴 할인 - EventService#calculateWeekendDiscount()
+  - [x] 특별 할인 - EventService#calculateSpecialDiscount()
+    - [x] 방문 날짜에 별이 있는지 여부 확인 EventService#hasStarInCalendar()
+  - [x] 증정 이벤트 할인 - OrderController#isChampagneProvided()
+- [x] 총 혜택 금액 출력 기능 - OutputView#printTotalBenefit()
+- [x] 할인 후 예상 결제 금액 출력 기능 - OutputView#printExpectedTotalAfterDiscount()
+- [x] 12월 이벤트 배지 출력 기능 - OutputView#printEventBadge()
+  - [x] 총 혜택 금액에 따라 별/트리/산타 구분 - EventService#determineBadge()
 ## 기능 요구 사항
 크리스마스 프로모션을 구현한다.
 ### 이벤트 목표
