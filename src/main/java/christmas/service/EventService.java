@@ -45,4 +45,14 @@ public class EventService {
         DayOfWeek dayOfWeek = date.getDayOfWeek();
         return dayOfWeek.getValue() == 7 || day == 25;
     }
+
+    public String determineBadge(int discountAmount) {
+        if (discountAmount >= 20_000) {
+            return "산타";
+        }
+        if (discountAmount >= 10_000) {
+            return "트리";
+        }
+        return "별";
+    }
 }
