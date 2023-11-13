@@ -7,6 +7,4 @@ public class Application {
         ChristmasController christmasController = new ChristmasController();
         christmasController.start();
     }
-
-
 }
