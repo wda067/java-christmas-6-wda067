@@ -53,4 +53,13 @@ class OrderServiceTest {
         Assertions.assertThatThrownBy(() -> orderService.validateMenuAndCount(menuAndCount))
                 .isInstanceOf(IllegalArgumentException.class);
     }
+
+    @DisplayName("중복된 메뉴를 입력할 경우 예외 발생")
+    @ParameterizedTest
+    @ValueSource(strings = {"양송이수프-1,양송이수프-2", "바비큐립-1,티본스테이크-1,바비큐립-1"})
+    void containMenuDuplicateMenu(String menuAndCount) {
+        map = orderService.convertStringToCollection(menuAndCount);
+        Assertions.assertThatThrownBy(() -> orderService.validateMenuAndCount(menuAndCount))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
 }
