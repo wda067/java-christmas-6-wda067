@@ -1,5 +1,9 @@
 package christmas.service;
 
+import static christmas.constants.Badge.NOTHING;
+import static christmas.constants.Badge.SANTA_BADGE;
+import static christmas.constants.Badge.STAR_BADGE;
+import static christmas.constants.Badge.TREE_BADGE;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import christmas.constants.Event;
@@ -75,5 +79,19 @@ class EventServiceTest {
 
         assertThat(eventService.calculateSpecialDiscount(weekday)).isEqualTo(-1000);
         assertThat(eventService.calculateSpecialDiscount(weekend)).isEqualTo(0);
+    }
+
+    @DisplayName("혜택 금엑에 따른 이벤트 배지 부여 테스트")
+    @Test
+    void determineBadge() {
+        int discountAmount1 = 22_000;
+        int discountAmount2 = 15_000;
+        int discountAmount3 = 6_000;
+        int discountAmount4 = 3_000;
+
+        assertThat(eventService.determineBadge(discountAmount1)).isEqualTo(SANTA_BADGE.getBadge());
+        assertThat(eventService.determineBadge(discountAmount2)).isEqualTo(TREE_BADGE.getBadge());
+        assertThat(eventService.determineBadge(discountAmount3)).isEqualTo(STAR_BADGE.getBadge());
+        assertThat(eventService.determineBadge(discountAmount4)).isEqualTo(NOTHING.getBadge());
     }
 }
