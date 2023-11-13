@@ -80,4 +80,15 @@ class OrderServiceTest {
         Assertions.assertThatThrownBy(() -> orderService.validateMenuAndCount(menuAndCount))
                 .isInstanceOf(IllegalArgumentException.class);
     }
+
+    @DisplayName("음료만 주문할 경우 예외 발생")
+    @ParameterizedTest
+    @ValueSource(strings = {"제로콜라-3", "레드와인-2"})
+    void isOnlyBeverage(String menuAndCount) {
+        map = orderService.convertStringToCollection(menuAndCount);
+        Assertions.assertThatThrownBy(() -> orderService.validateMenuAndCount(menuAndCount))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+
 }
