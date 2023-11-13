@@ -46,16 +46,32 @@ public class ChristmasController {
     }
 
     public void inputVisitDate() {
-        outputView.printWelcomeMessage();
-        visitDate = inputView.inputVisitDate();
-        orderService.validateVisitDate(visitDate);
+        inputView.printWelcomeMessage();
+        inputView.printInputVisitDateMessage();
+        while (true) {
+            try {
+                visitDate = inputView.inputVisitDate();
+                orderService.validateVisitDate(visitDate);
+                break;
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        }
     }
 
     public void inputMenuAndCount() {
-        String menuAndCount = inputView.inputMenuAndCount();
-        order = new Order(orderService.convertStringToCollection(menuAndCount));
-        orderService.validateMenuAndCount(menuAndCount);
-        outputView.printOverviewMessage(Integer.parseInt(visitDate));
+        inputView.printInputMenuAndCountMessage();
+        while (true) {
+            try {
+                String menuAndCount = inputView.inputMenuAndCount();
+                order = new Order(orderService.convertStringToCollection(menuAndCount));
+                orderService.validateMenuAndCount(menuAndCount);
+                outputView.printOverviewMessage(Integer.parseInt(visitDate));
+                break;
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        }
     }
 
     public void printOrderMenu() {
