@@ -24,4 +24,12 @@ class OrderServiceTest {
         Assertions.assertThatThrownBy(() -> orderService.validateVisitDate(visitDate))
                 .isInstanceOf(IllegalArgumentException.class);
     }
+
+    @DisplayName("방문 날짜가 1에서 31까지 숫자가 아닐 경우 예외 발생")
+    @ParameterizedTest
+    @ValueSource(strings = {"0", "32"})
+    void containVisitDateWrongRange(String visitDate) {
+        Assertions.assertThatThrownBy(() -> orderService.validateVisitDate(visitDate))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
 }
