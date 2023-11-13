@@ -4,6 +4,8 @@ import static christmas.constants.Badge.NOTHING;
 import static christmas.constants.Badge.SANTA_BADGE;
 import static christmas.constants.Badge.STAR_BADGE;
 import static christmas.constants.Badge.TREE_BADGE;
+import static christmas.constants.Event.WEEKDAY_EVENT;
+import static christmas.constants.Event.WEEKEND_EVENT;
 import static christmas.constants.NumberEnum.CHRISTMAS_DAY;
 import static christmas.constants.NumberEnum.CURRENT_YEAR;
 import static christmas.constants.NumberEnum.DEFAULT_DISCOUNT_AMOUNT;
@@ -34,6 +36,17 @@ public class EventService {
                             DISCOUNT_PER_DAY.getValue());
         }
         return ZERO_VALUE.getValue();
+    }
+
+    public void determineDayDiscount(int visitDate, HashMap<String, Integer> orderedMenu) {
+        if (isWeekend(visitDate)) {
+            int discount = calculateWeekendDiscount(orderedMenu);
+            orderedMenu.put(WEEKEND_EVENT.getEvent(), discount);
+        }
+        if (!isWeekend(visitDate)) {
+            int discount = calculateWeekdayDiscount(orderedMenu);
+            orderedMenu.put(WEEKDAY_EVENT.getEvent(), discount);
+        }
     }
 
     public int calculateWeekdayDiscount(HashMap<String, Integer> map) {
