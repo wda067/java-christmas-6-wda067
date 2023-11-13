@@ -25,4 +25,10 @@ public class ChristmasController {
         orderService.validateVisitDate(visitDate);
     }
 
+    public void inputMenuAndCount() {
+        String menuAndCount = inputView.inputMenuAndCount();
+        order = new Order(orderService.convertStringToCollection(menuAndCount));
+        orderService.validateMenuAndCount(menuAndCount);
+        outputView.printOverviewMessage(Integer.parseInt(visitDate));
+    }
 }
