@@ -71,4 +71,13 @@ class OrderServiceTest {
         Assertions.assertThatThrownBy(() -> orderService.validateMenuAndCount(menuAndCount))
                 .isInstanceOf(IllegalArgumentException.class);
     }
+
+    @DisplayName("존재하지 않는 메뉴를 입력할 경우 예외 발생")
+    @ParameterizedTest
+    @ValueSource(strings = {"양념치킨-1,타파스-2", "바비큐립-1,티본스테이크-2,제로사이다-1"})
+    void containMenuNotExisted(String menuAndCount) {
+        map = orderService.convertStringToCollection(menuAndCount);
+        Assertions.assertThatThrownBy(() -> orderService.validateMenuAndCount(menuAndCount))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
 }
