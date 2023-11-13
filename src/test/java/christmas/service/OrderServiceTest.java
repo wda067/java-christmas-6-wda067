@@ -62,4 +62,13 @@ class OrderServiceTest {
         Assertions.assertThatThrownBy(() -> orderService.validateMenuAndCount(menuAndCount))
                 .isInstanceOf(IllegalArgumentException.class);
     }
+
+    @DisplayName("1미만의 개수를 입력할 경우 예외 발생")
+    @ParameterizedTest
+    @ValueSource(strings = {"양송이수프-0,타파스-2", "바비큐립-1,티본스테이크-0,제로콜라-1"})
+    void isCountUnderOne(String menuAndCount) {
+        map = orderService.convertStringToCollection(menuAndCount);
+        Assertions.assertThatThrownBy(() -> orderService.validateMenuAndCount(menuAndCount))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
 }
