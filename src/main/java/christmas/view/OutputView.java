@@ -1,5 +1,7 @@
 package christmas.view;
 
+import static christmas.util.NumberFormatter.formatNumber;
+
 import java.util.HashMap;
 import java.util.Map.Entry;
 
@@ -15,9 +17,11 @@ public class OutputView {
 
     public void printOrderMenu(HashMap<String, Integer> orderMenu) {
         System.out.println("<주문 메뉴>");
-        for (Entry<String, Integer> entry : orderMenu.entrySet()) {
-            System.out.println(entry.getKey() + " " + entry.getValue() + "개");
-        }
+        orderMenu.forEach((menu, count) ->
+                System.out.println(menu + " " + count + "개"));
+//        for (Entry<String, Integer> entry : orderMenu.entrySet()) {
+//            System.out.println(entry.getKey() + " " + entry.getValue() + "개");
+//        }
     }
 
     public void printTotalOrderAmountBeforeDiscount(String price) {
@@ -37,23 +41,27 @@ public class OutputView {
 
     public void printBenefitDetails(HashMap<String, Integer> benefitDetails) {
         System.out.println("\n<혜택 내역>");
+        if (benefitDetails.isEmpty()) {
+            System.out.println("없음");
+            return;
+        }
         for (Entry<String, Integer> entry : benefitDetails.entrySet()) {
-            System.out.println(entry.getKey() + "-" + entry.getValue() + "원");
+            System.out.println(entry.getKey() + formatNumber(entry.getValue()) + "원");
         }
     }
 
     public void printTotalBenefitAmount(int amount) {
         System.out.println("\n<총혜택 금액>");
-        System.out.println(amount);
+        System.out.println(formatNumber(amount) + "원");
     }
 
     public void printExpectedTotalAfterDiscount(int total, int discount) {
         System.out.println("\n<할인 후 예상 결제 금액>");
-        System.out.println(total - discount);
+        System.out.println(formatNumber(total + discount) + "원");
     }
 
     public void printEventBadge(String badge) {
         System.out.println("\n<12월 이벤트 배지>");
-        System.out.println(badge);
+        System.out.print(badge);
     }
 }
