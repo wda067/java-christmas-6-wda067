@@ -1,5 +1,7 @@
 package christmas.controller;
 
+import static christmas.model.Menu.CHAMPAGNE;
+
 import christmas.model.Order;
 import christmas.service.EventService;
 import christmas.service.OrderService;
@@ -74,6 +76,13 @@ public class ChristmasController {
         int discount = eventService.calculateSpecialDiscount(Integer.parseInt(visitDate));
         if (discount != 0) {
             benefitDetails.put("특별 할인: ", discount);
+        }
+    }
+
+    public void setGiftEventBenefit() {
+        int discount = -1 * CHAMPAGNE.getPrice();
+        if (isProvided) {
+            benefitDetails.put("증정 이벤트: ", discount);
         }
     }
 }
