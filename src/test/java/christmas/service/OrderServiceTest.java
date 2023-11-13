@@ -44,4 +44,13 @@ class OrderServiceTest {
         Assertions.assertThatThrownBy(() -> orderService.validateMenuAndCount(menuAndCount))
                 .isInstanceOf(IllegalArgumentException.class);
     }
+
+    @DisplayName("메뉴와 개수가 쉼표로 구분되지 않을 때 예외 발생")
+    @ParameterizedTest
+    @ValueSource(strings = {"양송이수프-3,제로콜라-2바비큐립-2", "타파스-2해산물파스타-1"})
+    void isMenuAndCountNotDividedByComma(String menuAndCount) {
+        map = orderService.convertStringToCollection(menuAndCount);
+        Assertions.assertThatThrownBy(() -> orderService.validateMenuAndCount(menuAndCount))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
 }
