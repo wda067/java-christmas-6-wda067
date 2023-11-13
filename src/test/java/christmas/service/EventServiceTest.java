@@ -33,7 +33,7 @@ class EventServiceTest {
         assertThat(eventService.calculateXmasDiscount(day2))
                 .isEqualTo(0);
     }
-    
+
     @DisplayName("평일/주말 구분 테스트")
     @Test
     void isWeekend() {
@@ -65,5 +65,15 @@ class EventServiceTest {
 
         assertThat(eventService.hasStarInCalendar(weekday)).isTrue();
         assertThat(eventService.hasStarInCalendar(weekend)).isFalse();
+    }
+
+    @DisplayName("특별 이벤트 할인 테스트")
+    @Test
+    void calculateSpecialDiscount() {
+        int weekday = 3;
+        int weekend = 8;
+
+        assertThat(eventService.calculateSpecialDiscount(weekday)).isEqualTo(-1000);
+        assertThat(eventService.calculateSpecialDiscount(weekend)).isEqualTo(0);
     }
 }
