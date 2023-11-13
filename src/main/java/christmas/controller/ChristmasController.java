@@ -9,6 +9,7 @@ import christmas.util.NumberFormatter;
 import christmas.view.InputView;
 import christmas.view.OutputView;
 import java.util.HashMap;
+import java.util.Map;
 
 public class ChristmasController {
 
@@ -51,6 +52,15 @@ public class ChristmasController {
 
     public void printGiftMenu() {
         outputView.printGiftMenu(isProvided);
+    }
+
+    public void setBenefitDetails() {
+        if (orderService.getTotal() >= 10_000) {
+            setXmasDiscount();
+            setDayDiscount();
+            setSpecialDiscount();
+            setGiftEventBenefit();
+        }
     }
 
     public void setXmasDiscount() {
