@@ -13,7 +13,6 @@ import static christmas.constants.Message.OUTPUT_QUANTITY_UNIT;
 import static christmas.constants.Message.OUTPUT_TOTAL_AFTER_DISCOUNT_MESSAGE;
 import static christmas.constants.Message.OUTPUT_TOTAL_BEFORE_DISCOUNT_MESSAGE;
 import static christmas.constants.Message.OUTPUT_TOTAL_BENEFIT_AMOUNT_MESSAGE;
-import static christmas.constants.Message.OUTPUT_WELCOME_MESSAGE;
 import static christmas.util.NumberFormatter.formatNumber;
 
 import java.util.HashMap;
