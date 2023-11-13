@@ -21,7 +21,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class OrderService {
-    private final HashMap<String, Integer> map = new HashMap<>();
+    private HashMap<String, Integer> orderedMenu;
     private int total;
     private boolean isDuplicateName;
     private boolean isCountZeroValue;
@@ -47,18 +47,21 @@ public class OrderService {
     public HashMap<String, Integer> convertStringToCollection(String menuAndCount) {
         Pattern pattern = Pattern.compile(MENU_AND_COUNT_REGEX.getRegex());
         Matcher matcher = pattern.matcher(menuAndCount);
+        isDuplicateName = false;
+        isCountZeroValue = false;
+        orderedMenu = new HashMap<>();
         while (matcher.find()) {
             String menuName = matcher.group(1);
             int menuCount = Integer.parseInt(matcher.group(2));
-            if (map.containsKey(menuName)) {
+            if (orderedMenu.containsKey(menuName)) {
                 isDuplicateName = true;
             }
             if (menuCount < MINIMUM_COUNT.getValue()) {
                 isCountZeroValue = true;
             }
-            map.put(menuName, menuCount);
+            orderedMenu.put(menuName, menuCount);
         }
-        return map;
+        return orderedMenu;
     }
 
     public void validateMenuAndCount(String menuAndCount) {
@@ -87,23 +90,23 @@ public class OrderService {
     }
 
     private boolean isIncorrectFormat() {
-        return map.isEmpty();
+        return orderedMenu.isEmpty();
     }
 
     private boolean isDividedByComma(HashSet<String> set) {
-        return map.size() != set.size();
+        return orderedMenu.size() != set.size();
     }
 
     private boolean isMenuNotExists() {
-        return !new HashSet<>(Menu.getNameList()).containsAll(map.keySet());
+        return !new HashSet<>(Menu.getNameList()).containsAll(orderedMenu.keySet());
     }
 
     private boolean isOrderOnlyBeverage() {
-        return new HashSet<>(Menu.getBeverageList()).containsAll(map.keySet());
+        return new HashSet<>(Menu.getBeverageList()).containsAll(orderedMenu.keySet());
     }
 
     private boolean isOrderCountOverTwenty() {
-        int count = map.values().stream()
+        int count = orderedMenu.values().stream()
                 .mapToInt(Integer::intValue)
                 .sum();
         return count > MAXIMUM_COUNT.getValue();
