@@ -26,11 +26,6 @@ public class OrderService {
     private boolean isDuplicateName;
     private boolean isZeroValue;
 
-    private static boolean isVisitDateWrongRange(String visitDate) {
-        int day = Integer.parseInt(visitDate);
-        return day < FIRST_DAY_OF_THE_DECEMBER.getValue() || day > LAST_DAY_OF_THE_DECEMBER.getValue();
-    }
-
     public void validateVisitDate(String visitDate) {
         if (isVisitDateNonDigit(visitDate)) {
             throw new IllegalArgumentException(EXCEPTION_PREFIX.getMessage() + INVALID_DATE.getMessage());
@@ -40,8 +35,13 @@ public class OrderService {
         }
     }
 
-    public boolean isVisitDateNonDigit(String visitDate) {
+    private boolean isVisitDateNonDigit(String visitDate) {
         return Pattern.compile(NON_DIGIT_REGEX.getRegex()).matcher(visitDate).matches();
+    }
+
+    private boolean isVisitDateWrongRange(String visitDate) {
+        int day = Integer.parseInt(visitDate);
+        return day < FIRST_DAY_OF_THE_DECEMBER.getValue() || day > LAST_DAY_OF_THE_DECEMBER.getValue();
     }
 
     public HashMap<String, Integer> convertStringToCollection(String menuAndCount) {
@@ -86,15 +86,15 @@ public class OrderService {
         }
     }
 
-    public boolean isMenuNotExists() {
+    private boolean isMenuNotExists() {
         return !new HashSet<>(Menu.getNameList()).containsAll(map.keySet());
     }
 
-    public boolean isOrderOnlyBeverage() {
+    private boolean isOrderOnlyBeverage() {
         return new HashSet<>(Menu.getBeverageList()).containsAll(map.keySet());
     }
 
-    public boolean isOrderCountOverTwenty() {
+    private boolean isOrderCountOverTwenty() {
         int count = map.values().stream()
                 .mapToInt(Integer::intValue)
                 .sum();
