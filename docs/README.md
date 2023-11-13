@@ -2,12 +2,18 @@
 
 ## 기능 목록
 - [x] 식당 방문 날짜를 입력 받는 기능 - InputView#inputVisitDate()
-  - [ ] 1에서 31까지의 숫자인지 검증
+  - [x] 숫자를 입력했는지 검증 - OrderService#validateVisitDate()
+  - [x] 1에서 31까지의 숫자인지 검증 - OrderService#validateVisitDate()
 - [x] 주문 메뉴와 개수를 입력 받는 기능 - InputView#inputMenuAndCount()
   - [x] 메뉴판 생성 - Menu
   - [x] 입력받은 String을 Map으로 변환 - OrderService#convertStringToCollection()
-  - [ ] 음료만 주문 시 예외 발생
-  - [ ] 총 주문 개수가 20개를 초과할 시 예외 발생
+  - [x] 메뉴 형식이 예시와 다른 경우 예외 발생 - OrderService#validateMenuAndCount()
+  - [x] 쉼표로 구분하여 입력하였는지 검증 - OrderService#validateMenuAndCount()
+  - [x] 중복된 메뉴를 입력할 시 예외 발생 - OrderService#validateMenuAndCount()
+  - [x] 메뉴의 개수를 1개 이상 입력했는지 검증 - OrderService#validateMenuAndCount()
+  - [x] 메뉴판에 없는 메뉴 주문시 예외 발생 - OrderService#validateMenuAndCount()
+  - [x] 음료만 주문 시 예외 발생 - OrderService#validateMenuAndCount()
+  - [x] 총 주문 개수가 20개를 초과할 시 예외 발생 - OrderService#validateMenuAndCount()
 - [x] 주문 메뉴를 순서 관계없이 출력하는 기능 - OutputView#printOrderMenu()
 - [x] 할인 전 총 주문 금액 출력하는 기능 - OutputView#printTotalOrderAmountBeforeDiscount()
   - [x] 할인 전 총 주문 금액을 계산하는 기능 - OrderService#calculateTotal()
@@ -26,6 +32,7 @@
 - [x] 할인 후 예상 결제 금액 출력 기능 - OutputView#printExpectedTotalAfterDiscount()
 - [x] 12월 이벤트 배지 출력 기능 - OutputView#printEventBadge()
   - [x] 총 혜택 금액에 따라 별/트리/산타 구분 - EventService#determineBadge()
+
 ## 기능 요구 사항
 크리스마스 프로모션을 구현한다.
 ### 이벤트 목표
