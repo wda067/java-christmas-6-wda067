@@ -87,4 +87,15 @@ public class OrderService {
                 .sum();
         return count > 20;
     }
+
+    public void calculateTotal(HashMap<String, Integer> map) {
+        total = Arrays.stream(Menu.values())
+                .filter(menu -> map.containsKey(menu.getName()))
+                .mapToInt(menu -> menu.getPrice() * map.get(menu.getName()))
+                .sum();
+    }
+
+    public int getTotal() {
+        return total;
+    }
 }
