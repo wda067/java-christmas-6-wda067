@@ -47,4 +47,13 @@ class EventServiceTest {
         assertThat(benefitDetails).containsEntry("주말 할인: ", -4046);
     }
 
+    @DisplayName("평일/주말 구분 테스트")
+    @Test
+    void isWeekend() {
+        int weekday = 3;
+        int weekend = 8;
+
+        assertThat(eventService.isWeekend(weekday)).isFalse();
+        assertThat(eventService.isWeekend(weekend)).isTrue();
+    }
 }
