@@ -31,4 +31,8 @@ public class ChristmasController {
         orderService.validateMenuAndCount(menuAndCount);
         outputView.printOverviewMessage(Integer.parseInt(visitDate));
     }
+
+    public void printOrderMenu() {
+        outputView.printOrderMenu(order.map());
+    }
 }
