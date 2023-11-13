@@ -8,6 +8,7 @@ import static christmas.constants.NumberEnum.GIFT_EVENT_AMOUNT;
 import static christmas.constants.NumberEnum.LAST_DAY_OF_THE_DECEMBER;
 import static christmas.constants.NumberEnum.MAXIMUM_COUNT;
 import static christmas.constants.NumberEnum.MINIMUM_COUNT;
+import static christmas.constants.Regex.COMMA_REGEX;
 import static christmas.constants.Regex.MENU_AND_COUNT_REGEX;
 import static christmas.constants.Regex.NON_DIGIT_REGEX;
 
@@ -61,7 +62,7 @@ public class OrderService {
     }
 
     public void validateMenuAndCount(String menuAndCount) {
-        HashSet<String> set = new HashSet<>(List.of(menuAndCount.split(MENU_AND_COUNT_REGEX.getRegex())));
+        HashSet<String> set = new HashSet<>(List.of(menuAndCount.split(COMMA_REGEX.getRegex())));
         if (map.isEmpty()) {
             throw new IllegalArgumentException(EXCEPTION_PREFIX.getMessage() + INVALID_ORDER.getMessage());
         }
