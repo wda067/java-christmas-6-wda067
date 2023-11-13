@@ -9,6 +9,7 @@ import christmas.util.NumberFormatter;
 import christmas.view.InputView;
 import christmas.view.OutputView;
 import java.util.HashMap;
+import java.util.Map;
 
 public class ChristmasController {
 
@@ -104,5 +105,13 @@ public class ChristmasController {
                 .mapToInt(Integer::intValue)
                 .sum();
         outputView.printTotalBenefitAmount(benefitAmount);
+    }
+
+    public void printTotalAmount() {
+        int discount = benefitDetails.entrySet().stream()
+                .filter(event -> !event.getKey().equals("증정 이벤트: "))
+                .mapToInt(Map.Entry::getValue)
+                .sum();
+        outputView.printExpectedTotalAfterDiscount(orderService.getTotal(), discount);
     }
 }
