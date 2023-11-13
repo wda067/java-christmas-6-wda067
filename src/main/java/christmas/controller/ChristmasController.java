@@ -9,7 +9,6 @@ import christmas.util.NumberFormatter;
 import christmas.view.InputView;
 import christmas.view.OutputView;
 import java.util.HashMap;
-import java.util.Map;
 
 public class ChristmasController {
 
@@ -94,5 +93,9 @@ public class ChristmasController {
         if (isProvided) {
             benefitDetails.put("증정 이벤트: ", discount);
         }
+    }
+
+    public void printBenefitDetails() {
+        outputView.printBenefitDetails(benefitDetails);
     }
 }
