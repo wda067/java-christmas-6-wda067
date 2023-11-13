@@ -1,5 +1,6 @@
 package christmas.service;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -111,4 +112,12 @@ class OrderServiceTest {
                 .isEqualTo(142000);
     }
 
+    @DisplayName("샴페인 증정 테스트")
+    @Test
+    void isChampagneProvided() {
+        int total1 = 50000;
+        int total2 = 130000;
+        assertThat(orderService.isChampagneProvided(total1)).isFalse();
+        assertThat(orderService.isChampagneProvided(total2)).isTrue();
+    }
 }
