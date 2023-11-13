@@ -31,7 +31,7 @@ public class ChristmasController {
     private boolean isProvided;
     private int benefitAmount;
 
-    public ChristmasController() {
+    public void start() {
         inputVisitDate();
         inputMenuAndCount();
         printOrderMenu();
@@ -60,6 +60,7 @@ public class ChristmasController {
     }
 
     public void inputMenuAndCount() {
+        inputView.printMenuTable();
         inputView.printInputMenuAndCountMessage();
         while (true) {
             try {
@@ -109,15 +110,8 @@ public class ChristmasController {
     }
 
     public void setDayDiscount() {
-        boolean isWeekend = eventService.isWeekend(Integer.parseInt(visitDate));
-        int weekendDiscount = eventService.calculateWeekendDiscount(order.map());
-        int weekdayDiscount = eventService.calculateWeekdayDiscount(order.map());
-        if (isWeekend && weekendDiscount != ZERO_VALUE.getValue()) {
-            benefitDetails.put(WEEKEND_EVENT.getEvent(), weekendDiscount);
-        }
-        if (!isWeekend && weekdayDiscount != ZERO_VALUE.getValue()) {
-            benefitDetails.put(WEEKDAY_EVENT.getEvent(), weekdayDiscount);
-        }
+        eventService.determineDayDiscount(Integer.parseInt(visitDate),
+                benefitDetails, order.map());
     }
 
     public void setSpecialDiscount() {
