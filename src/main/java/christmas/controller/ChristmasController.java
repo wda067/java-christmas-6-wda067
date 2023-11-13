@@ -22,6 +22,20 @@ public class ChristmasController {
     private String visitDate;
     private boolean isProvided;
     private int benefitAmount;
+    
+    public ChristmasController() {
+        inputVisitDate();
+        inputMenuAndCount();
+        printOrderMenu();
+        printTotalBeforeDiscount();
+        isChampagneProvided();
+        printGiftMenu();
+        setBenefitDetails();
+        printBenefitDetails();
+        printTotalBenefit();
+        printTotalAmount();
+        printEventBadge();
+    }
 
     public void inputVisitDate() {
         outputView.printWelcomeMessage();
