@@ -19,9 +19,6 @@ public class OutputView {
         System.out.println("<주문 메뉴>");
         orderMenu.forEach((menu, count) ->
                 System.out.println(menu + " " + count + "개"));
-//        for (Entry<String, Integer> entry : orderMenu.entrySet()) {
-//            System.out.println(entry.getKey() + " " + entry.getValue() + "개");
-//        }
     }
 
     public void printTotalOrderAmountBeforeDiscount(String price) {
@@ -45,9 +42,8 @@ public class OutputView {
             System.out.println("없음");
             return;
         }
-        for (Entry<String, Integer> entry : benefitDetails.entrySet()) {
-            System.out.println(entry.getKey() + formatNumber(entry.getValue()) + "원");
-        }
+        benefitDetails.forEach((event, discount) ->
+                System.out.println(event + formatNumber(discount) + "원"));
     }
 
     public void printTotalBenefitAmount(int amount) {
