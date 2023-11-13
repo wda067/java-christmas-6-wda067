@@ -32,6 +32,7 @@ public class ChristmasController {
     public void start() {
         inputVisitDate();
         inputMenuAndCount();
+        printOverviewMessage();
         printOrderMenu();
         printTotalBeforeDiscount();
         isChampagneProvided();
@@ -66,12 +67,15 @@ public class ChristmasController {
                 String menuAndCount = inputView.inputMenuAndCount();
                 order = new Order(orderService.convertStringToCollection(menuAndCount));
                 orderService.validateMenuAndCount(menuAndCount);
-                outputView.printOverviewMessage(Integer.parseInt(visitDate));
                 break;
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }
         }
+    }
+
+    public void printOverviewMessage() {
+        outputView.printOverviewMessage(Integer.parseInt(visitDate));
     }
 
     public void printOrderMenu() {
