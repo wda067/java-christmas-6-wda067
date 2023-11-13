@@ -90,5 +90,14 @@ class OrderServiceTest {
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
+    @DisplayName("메뉴를 20개 초과 주문할 경우 예외 발생")
+    @ParameterizedTest
+    @ValueSource(strings = {"크리스마스파스타-5,시저샐러드-16", "바비큐립-23"})
+    void isCountOverTwenty(String menuAndCount) {
+        map = orderService.convertStringToCollection(menuAndCount);
+        Assertions.assertThatThrownBy(() -> orderService.validateMenuAndCount(menuAndCount))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
 
 }
