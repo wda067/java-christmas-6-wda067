@@ -24,7 +24,7 @@ public class OrderService {
     private final HashMap<String, Integer> map = new HashMap<>();
     private int total;
     private boolean isDuplicateName;
-    private boolean isZeroValue;
+    private boolean isCountZeroValue;
 
     public void validateVisitDate(String visitDate) {
         if (isVisitDateNonDigit(visitDate)) {
@@ -54,7 +54,7 @@ public class OrderService {
                 isDuplicateName = true;
             }
             if (menuCount < MINIMUM_COUNT.getValue()) {
-                isZeroValue = true;
+                isCountZeroValue = true;
             }
             map.put(menuName, menuCount);
         }
@@ -63,16 +63,16 @@ public class OrderService {
 
     public void validateMenuAndCount(String menuAndCount) {
         HashSet<String> set = new HashSet<>(List.of(menuAndCount.split(COMMA_REGEX.getRegex())));
-        if (map.isEmpty()) {
+        if (isIncorrectFormat()) {
             throw new IllegalArgumentException(EXCEPTION_PREFIX.getMessage() + INVALID_ORDER.getMessage());
         }
-        if (map.size() != set.size()) {
+        if (isDividedByComma(set)) {
             throw new IllegalArgumentException(EXCEPTION_PREFIX.getMessage() + INVALID_ORDER.getMessage());
         }
         if (isDuplicateName) {
             throw new IllegalArgumentException(EXCEPTION_PREFIX.getMessage() + INVALID_ORDER.getMessage());
         }
-        if (isZeroValue) {
+        if (isCountZeroValue) {
             throw new IllegalArgumentException(EXCEPTION_PREFIX.getMessage() + INVALID_ORDER.getMessage());
         }
         if (isMenuNotExists()) {
@@ -84,6 +84,14 @@ public class OrderService {
         if (isOrderCountOverTwenty()) {
             throw new IllegalArgumentException(EXCEPTION_PREFIX.getMessage() + INVALID_ORDER.getMessage());
         }
+    }
+
+    private boolean isIncorrectFormat() {
+        return map.isEmpty();
+    }
+
+    private boolean isDividedByComma(HashSet<String> set) {
+        return map.size() != set.size();
     }
 
     private boolean isMenuNotExists() {
