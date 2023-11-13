@@ -22,7 +22,6 @@ public enum NumberEnum {
     TREE_BADGE_DISCOUNT_AMOUNT(10_000),
     STAR_BADGE_DISCOUNT_AMOUNT(50_000);
 
-
     private final int value;
 
     NumberEnum(int value) {
