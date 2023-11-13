@@ -65,6 +65,7 @@ public class ChristmasController {
         while (true) {
             try {
                 String menuAndCount = inputView.inputMenuAndCount();
+                orderService.initializeVariables();
                 order = new Order(orderService.convertStringToCollection(menuAndCount));
                 orderService.validateMenuAndCount(menuAndCount);
                 break;
