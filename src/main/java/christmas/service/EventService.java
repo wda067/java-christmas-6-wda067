@@ -51,18 +51,18 @@ public class EventService {
         }
     }
 
-    public int calculateWeekdayDiscount(HashMap<String, Integer> map) {
-        long dessertCount = map.keySet().stream()
+    public int calculateWeekdayDiscount(HashMap<String, Integer> orderMenu) {
+        long dessertCount = orderMenu.keySet().stream()
                 .filter(name -> Menu.getDessertList().contains(name))
-                .mapToInt(map::get)
+                .mapToInt(orderMenu::get)
                 .sum();
         return (int) (NEGATIVE_MULTIPLIER.getValue() * (dessertCount * DISCOUNT_PER_MENU.getValue()));
     }
 
-    public int calculateWeekendDiscount(HashMap<String, Integer> map) {
-        long mainCount = map.keySet().stream()
+    public int calculateWeekendDiscount(HashMap<String, Integer> orderMenu) {
+        long mainCount = orderMenu.keySet().stream()
                 .filter(name -> Menu.getMainList().contains(name))
-                .mapToInt(map::get)
+                .mapToInt(orderMenu::get)
                 .sum();
         return (int) (NEGATIVE_MULTIPLIER.getValue() * (mainCount * DISCOUNT_PER_MENU.getValue()));
     }
