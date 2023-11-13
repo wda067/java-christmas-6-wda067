@@ -33,6 +33,16 @@ class EventServiceTest {
         assertThat(eventService.calculateXmasDiscount(day2))
                 .isEqualTo(0);
     }
+    
+    @DisplayName("평일/주말 구분 테스트")
+    @Test
+    void isWeekend() {
+        int weekday = 3;
+        int weekend = 8;
+
+        assertThat(eventService.isWeekend(weekday)).isFalse();
+        assertThat(eventService.isWeekend(weekend)).isTrue();
+    }
 
     @DisplayName("평일/주말 구분하여 할인 테스트")
     @Test
@@ -47,13 +57,13 @@ class EventServiceTest {
         assertThat(benefitDetails).containsEntry("주말 할인: ", -4046);
     }
 
-    @DisplayName("평일/주말 구분 테스트")
+    @DisplayName("이벤트 달력에 별이 있는 날인지 테스트")
     @Test
-    void isWeekend() {
+    void hasStarInCalendar() {
         int weekday = 3;
         int weekend = 8;
 
-        assertThat(eventService.isWeekend(weekday)).isFalse();
-        assertThat(eventService.isWeekend(weekend)).isTrue();
+        assertThat(eventService.hasStarInCalendar(weekday)).isTrue();
+        assertThat(eventService.hasStarInCalendar(weekend)).isFalse();
     }
 }
