@@ -42,4 +42,12 @@ public class ChristmasController {
         int total = orderService.getTotal();
         outputView.printTotalOrderAmountBeforeDiscount(NumberFormatter.formatNumber(total));
     }
+
+    public void isChampagneProvided() {
+        isProvided = orderService.isChampagneProvided(orderService.getTotal());
+    }
+
+    public void printGiftMenu() {
+        outputView.printGiftMenu(isProvided);
+    }
 }
