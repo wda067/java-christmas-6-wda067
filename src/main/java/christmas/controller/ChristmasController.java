@@ -98,4 +98,11 @@ public class ChristmasController {
     public void printBenefitDetails() {
         outputView.printBenefitDetails(benefitDetails);
     }
+
+    public void printTotalBenefit() {
+        benefitAmount = benefitDetails.values().stream()
+                .mapToInt(Integer::intValue)
+                .sum();
+        outputView.printTotalBenefitAmount(benefitAmount);
+    }
 }
