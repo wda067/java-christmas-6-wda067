@@ -20,9 +20,6 @@ import java.util.HashMap;
 
 public class OutputView {
 
-    public void printWelcomeMessage() {
-        System.out.println(OUTPUT_WELCOME_MESSAGE.getMessage());
-    }
 
     public void printOverviewMessage(int day) {
         System.out.printf(OUTPUT_OVERVIEW_MESSAGE.getMessage(), day);
