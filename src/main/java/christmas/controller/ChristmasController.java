@@ -50,4 +50,11 @@ public class ChristmasController {
     public void printGiftMenu() {
         outputView.printGiftMenu(isProvided);
     }
+
+    public void setXmasDiscount() {
+        int discount = eventService.calculateXmasDiscount(Integer.parseInt(visitDate));
+        if (discount != 0) {
+            benefitDetails.put("크리스마스 디데이 할인: ", discount);
+        }
+    }
 }
