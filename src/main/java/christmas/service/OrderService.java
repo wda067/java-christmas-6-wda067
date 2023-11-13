@@ -47,4 +47,44 @@ public class OrderService {
         }
         return map;
     }
+
+    public void validateMenuAndCount(String menuAndCount) {
+        HashSet<String> set = new HashSet<>(List.of(menuAndCount.split(",")));
+        if (map.isEmpty()) {
+            throw new IllegalArgumentException("유효하지 않은 주문입니다. 다시 입력해 주세요.");
+        }
+        if (map.size() != set.size()) {
+            throw new IllegalArgumentException("유효하지 않은 주문입니다. 다시 입력해 주세요.");
+        }
+        if (isDuplicateName) {
+            throw new IllegalArgumentException("유효하지 않은 주문입니다. 다시 입력해 주세요.");
+        }
+        if (isZeroValue) {
+            throw new IllegalArgumentException("유효하지 않은 주문입니다. 다시 입력해 주세요.");
+        }
+        if (isMenuNotExists()) {
+            throw new IllegalArgumentException("유효하지 않은 주문입니다. 다시 입력해 주세요.");
+        }
+        if (isOrderOnlyBeverage()) {
+            throw new IllegalArgumentException("유효하지 않은 주문입니다. 다시 입력해 주세요.");
+        }
+        if (isOrderCountOverTwenty()) {
+            throw new IllegalArgumentException("유효하지 않은 주문입니다. 다시 입력해 주세요.");
+        }
+    }
+
+    public boolean isMenuNotExists() {
+        return !new HashSet<>(Menu.getNameList()).containsAll(map.keySet());
+    }
+
+    public boolean isOrderOnlyBeverage() {
+        return new HashSet<>(Menu.getBeverageList()).containsAll(map.keySet());
+    }
+
+    public boolean isOrderCountOverTwenty() {
+        int count = map.values().stream()
+                .mapToInt(Integer::intValue)
+                .sum();
+        return count > 20;
+    }
 }
