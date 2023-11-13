@@ -3,6 +3,7 @@ package christmas.controller;
 import christmas.model.Order;
 import christmas.service.EventService;
 import christmas.service.OrderService;
+import christmas.util.NumberFormatter;
 import christmas.view.InputView;
 import christmas.view.OutputView;
 import java.util.HashMap;
@@ -34,5 +35,11 @@ public class ChristmasController {
 
     public void printOrderMenu() {
         outputView.printOrderMenu(order.map());
+    }
+
+    public void printTotalBeforeDiscount() {
+        orderService.calculateTotal(order.map());
+        int total = orderService.getTotal();
+        outputView.printTotalOrderAmountBeforeDiscount(NumberFormatter.formatNumber(total));
     }
 }
