@@ -57,4 +57,16 @@ public class ChristmasController {
             benefitDetails.put("크리스마스 디데이 할인: ", discount);
         }
     }
+
+    public void setDayDiscount() {
+        boolean isWeekend = eventService.isWeekend(Integer.parseInt(visitDate));
+        int weekendDiscount = eventService.calculateWeekendDiscount(order.map());
+        int weekdayDiscount = eventService.calculateWeekdayDiscount(order.map());
+        if (isWeekend && weekendDiscount != 0) {
+            benefitDetails.put("주말 할인: ", weekendDiscount);
+        }
+        if (!isWeekend && weekdayDiscount != 0) {
+            benefitDetails.put("평일 할인: ", weekdayDiscount);
+        }
+    }
 }
