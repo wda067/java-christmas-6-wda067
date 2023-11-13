@@ -38,14 +38,16 @@ public class EventService {
         return ZERO_VALUE.getValue();
     }
 
-    public void determineDayDiscount(int visitDate, HashMap<String, Integer> orderedMenu) {
+    public void determineDayDiscount(int visitDate,
+                                     HashMap<String, Integer> benefitDetails,
+                                     HashMap<String, Integer> orderMenu) {
         if (isWeekend(visitDate)) {
-            int discount = calculateWeekendDiscount(orderedMenu);
-            orderedMenu.put(WEEKEND_EVENT.getEvent(), discount);
+            int discount = calculateWeekendDiscount(orderMenu);
+            benefitDetails.put(WEEKEND_EVENT.getEvent(), discount);
         }
         if (!isWeekend(visitDate)) {
-            int discount = calculateWeekdayDiscount(orderedMenu);
-            orderedMenu.put(WEEKDAY_EVENT.getEvent(), discount);
+            int discount = calculateWeekdayDiscount(orderMenu);
+            benefitDetails.put(WEEKDAY_EVENT.getEvent(), discount);
         }
     }
 
