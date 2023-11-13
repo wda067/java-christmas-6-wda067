@@ -37,7 +37,12 @@ public class InputView {
                     System.out.println(menuItems);
                 });
     }
-    
+
+    public void printEventNotice() {
+        System.out.print((System.lineSeparator()));
+        System.out.println(INPUT_EVENT_NOTICE_MESSAGE.getMessage());
+    }
+
     public void printInputMenuAndCountMessage() {
         System.out.println(INPUT_MENU_AND_COUNT.getMessage());
     }
