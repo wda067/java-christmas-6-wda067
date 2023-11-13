@@ -69,4 +69,11 @@ public class ChristmasController {
             benefitDetails.put("평일 할인: ", weekdayDiscount);
         }
     }
+
+    public void setSpecialDiscount() {
+        int discount = eventService.calculateSpecialDiscount(Integer.parseInt(visitDate));
+        if (discount != 0) {
+            benefitDetails.put("특별 할인: ", discount);
+        }
+    }
 }
