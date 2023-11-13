@@ -5,7 +5,9 @@
   - [x] 숫자를 입력했는지 검증 - OrderService#validateVisitDate()
   - [x] 1에서 31까지의 숫자인지 검증 - OrderService#validateVisitDate()
 - [x] 주문 메뉴와 개수를 입력 받는 기능 - InputView#inputMenuAndCount()
-  - [x] 메뉴판 생성 - Menu
+  - [x] 입력 메시지 출력 - InputView#printInputMenuAndCountMessage()
+  - [x] 메뉴판 출력 - InputView#printMenuTable()
+  - [x] 이벤트 주의사항 출력 - InputView#printEventNotice()
   - [x] 입력받은 String을 Map으로 변환 - OrderService#convertStringToCollection()
   - [x] 메뉴 형식이 예시와 다른 경우 예외 발생 - OrderService#validateMenuAndCount()
   - [x] 쉼표로 구분하여 입력하였는지 검증 - OrderService#validateMenuAndCount()
@@ -17,7 +19,7 @@
 - [x] 주문 메뉴를 순서 관계없이 출력하는 기능 - OutputView#printOrderMenu()
 - [x] 할인 전 총 주문 금액 출력하는 기능 - OutputView#printTotalOrderAmountBeforeDiscount()
   - [x] 할인 전 총 주문 금액을 계산하는 기능 - OrderService#calculateTotal()
-  - [ ] 총 주문 금액이 1만 원 이상일 시 이벤트 적용 
+  - [x] 총 주문 금액이 1만 원 이상일 시 이벤트 적용 - ChristmasController#setBenefitDetails()
 - [x] 증정 메뉴 출력 기능 - OutputView#printGiftMenu()
   - [x] 금액이 12만 원 이상이면 샴페인 1개 증정 - OrderService#isChampagneProvided()
 - [x] 혜택 내역 출력 기능 - OutputView#printBenefitDetails()
