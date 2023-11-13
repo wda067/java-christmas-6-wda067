@@ -59,6 +59,7 @@ public class ChristmasController {
 
     public void inputMenuAndCount() {
         inputView.printMenuTable();
+        inputView.printEventNotice();
         inputView.printInputMenuAndCountMessage();
         while (true) {
             try {
