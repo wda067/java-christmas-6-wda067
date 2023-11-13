@@ -44,12 +44,15 @@ public class OrderService {
         return day < FIRST_DAY_OF_THE_DECEMBER.getValue() || day > LAST_DAY_OF_THE_DECEMBER.getValue();
     }
 
-    public HashMap<String, Integer> convertStringToCollection(String menuAndCount) {
-        Pattern pattern = Pattern.compile(MENU_AND_COUNT_REGEX.getRegex());
-        Matcher matcher = pattern.matcher(menuAndCount);
+    public void initializeVariables() {
         isDuplicateName = false;
         isCountZeroValue = false;
         orderedMenu = new HashMap<>();
+    }
+
+    public HashMap<String, Integer> convertStringToCollection(String menuAndCount) {
+        Pattern pattern = Pattern.compile(MENU_AND_COUNT_REGEX.getRegex());
+        Matcher matcher = pattern.matcher(menuAndCount);
         while (matcher.find()) {
             String menuName = matcher.group(1);
             int menuCount = Integer.parseInt(matcher.group(2));
