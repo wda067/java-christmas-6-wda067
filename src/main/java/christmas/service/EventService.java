@@ -56,6 +56,9 @@ public class EventService {
         if (discountAmount >= 10_000) {
             return "트리";
         }
-        return "별";
+        if (discountAmount >= 5_000) {
+            return "별";
+        }
+        return "없음";
     }
 }
