@@ -1,11 +1,13 @@
 package christmas.service;
 
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.HashMap;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -24,7 +26,7 @@ class OrderServiceTest {
     @ParameterizedTest
     @ValueSource(strings = {" 3", "a", "12b"})
     void containVisitDateNonDigit(String visitDate) {
-        Assertions.assertThatThrownBy(() -> orderService.validateVisitDate(visitDate))
+        assertThatThrownBy(() -> orderService.validateVisitDate(visitDate))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -32,7 +34,7 @@ class OrderServiceTest {
     @ParameterizedTest
     @ValueSource(strings = {"0", "32"})
     void containVisitDateWrongRange(String visitDate) {
-        Assertions.assertThatThrownBy(() -> orderService.validateVisitDate(visitDate))
+        assertThatThrownBy(() -> orderService.validateVisitDate(visitDate))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -41,7 +43,7 @@ class OrderServiceTest {
     @ValueSource(strings = {"asfd", "123", " av42"})
     void hasMenuAndCountIncorrectFormat(String menuAndCount) {
         map = orderService.convertStringToCollection(menuAndCount);
-        Assertions.assertThatThrownBy(() -> orderService.validateMenuAndCount(menuAndCount))
+        assertThatThrownBy(() -> orderService.validateMenuAndCount(menuAndCount))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -50,7 +52,7 @@ class OrderServiceTest {
     @ValueSource(strings = {"양송이수프-3,제로콜라-2바비큐립-2", "타파스-2해산물파스타-1"})
     void isMenuAndCountNotDividedByComma(String menuAndCount) {
         map = orderService.convertStringToCollection(menuAndCount);
-        Assertions.assertThatThrownBy(() -> orderService.validateMenuAndCount(menuAndCount))
+        assertThatThrownBy(() -> orderService.validateMenuAndCount(menuAndCount))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -59,7 +61,7 @@ class OrderServiceTest {
     @ValueSource(strings = {"양송이수프-1,양송이수프-2", "바비큐립-1,티본스테이크-1,바비큐립-1"})
     void containMenuDuplicateMenu(String menuAndCount) {
         map = orderService.convertStringToCollection(menuAndCount);
-        Assertions.assertThatThrownBy(() -> orderService.validateMenuAndCount(menuAndCount))
+        assertThatThrownBy(() -> orderService.validateMenuAndCount(menuAndCount))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -68,7 +70,7 @@ class OrderServiceTest {
     @ValueSource(strings = {"양송이수프-0,타파스-2", "바비큐립-1,티본스테이크-0,제로콜라-1"})
     void isCountUnderOne(String menuAndCount) {
         map = orderService.convertStringToCollection(menuAndCount);
-        Assertions.assertThatThrownBy(() -> orderService.validateMenuAndCount(menuAndCount))
+        assertThatThrownBy(() -> orderService.validateMenuAndCount(menuAndCount))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -77,7 +79,7 @@ class OrderServiceTest {
     @ValueSource(strings = {"양념치킨-1,타파스-2", "바비큐립-1,티본스테이크-2,제로사이다-1"})
     void containMenuNotExisted(String menuAndCount) {
         map = orderService.convertStringToCollection(menuAndCount);
-        Assertions.assertThatThrownBy(() -> orderService.validateMenuAndCount(menuAndCount))
+        assertThatThrownBy(() -> orderService.validateMenuAndCount(menuAndCount))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -86,7 +88,7 @@ class OrderServiceTest {
     @ValueSource(strings = {"제로콜라-3", "레드와인-2"})
     void isOnlyBeverage(String menuAndCount) {
         map = orderService.convertStringToCollection(menuAndCount);
-        Assertions.assertThatThrownBy(() -> orderService.validateMenuAndCount(menuAndCount))
+        assertThatThrownBy(() -> orderService.validateMenuAndCount(menuAndCount))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -95,9 +97,18 @@ class OrderServiceTest {
     @ValueSource(strings = {"크리스마스파스타-5,시저샐러드-16", "바비큐립-23"})
     void isCountOverTwenty(String menuAndCount) {
         map = orderService.convertStringToCollection(menuAndCount);
-        Assertions.assertThatThrownBy(() -> orderService.validateMenuAndCount(menuAndCount))
+        assertThatThrownBy(() -> orderService.validateMenuAndCount(menuAndCount))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
+    @DisplayName("주문한 메뉴 할인 전 가격 테스트")
+    @Test
+    void countMenu() {
+        String menuAndCount = "티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1";
+        map = orderService.convertStringToCollection(menuAndCount);
+        orderService.calculateTotal(map);
+        Assertions.assertThat(orderService.getTotal())
+                .isEqualTo(142000);
+    }
 
 }
