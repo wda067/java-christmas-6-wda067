@@ -114,4 +114,9 @@ public class ChristmasController {
                 .sum();
         outputView.printExpectedTotalAfterDiscount(orderService.getTotal(), discount);
     }
+
+    public void printEventBadge() {
+        String badge = eventService.determineBadge(Math.abs(benefitAmount));
+        outputView.printEventBadge(badge);
+    }
 }
