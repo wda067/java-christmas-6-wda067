@@ -1,5 +1,16 @@
 package christmas.service;
 
+import static christmas.constants.ExceptionMessage.EXCEPTION_PREFIX;
+import static christmas.constants.ExceptionMessage.INVALID_DATE;
+import static christmas.constants.ExceptionMessage.INVALID_ORDER;
+import static christmas.constants.NumberEnum.FIRST_DAY_OF_THE_DECEMBER;
+import static christmas.constants.NumberEnum.GIFT_EVENT_AMOUNT;
+import static christmas.constants.NumberEnum.LAST_DAY_OF_THE_DECEMBER;
+import static christmas.constants.NumberEnum.MAXIMUM_COUNT;
+import static christmas.constants.NumberEnum.MINIMUM_COUNT;
+import static christmas.constants.Regex.MENU_AND_COUNT_REGEX;
+import static christmas.constants.Regex.NON_DIGIT_REGEX;
+
 import christmas.model.Menu;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -15,24 +26,25 @@ public class OrderService {
     private boolean isZeroValue;
 
     private static boolean isVisitDateWrongRange(String visitDate) {
-        return Integer.parseInt(visitDate) < 1 || Integer.parseInt(visitDate) > 31;
+        int day = Integer.parseInt(visitDate);
+        return day < FIRST_DAY_OF_THE_DECEMBER.getValue() || day > LAST_DAY_OF_THE_DECEMBER.getValue();
     }
 
     public void validateVisitDate(String visitDate) {
         if (isVisitDateNonDigit(visitDate)) {
-            throw new IllegalArgumentException("유효하지 않은 날짜입니다. 다시 입력해 주세요.");
+            throw new IllegalArgumentException(EXCEPTION_PREFIX.getMessage() + INVALID_DATE.getMessage());
         }
         if (isVisitDateWrongRange(visitDate)) {
-            throw new IllegalArgumentException("유효하지 않은 날짜입니다. 다시 입력해 주세요.");
+            throw new IllegalArgumentException(EXCEPTION_PREFIX.getMessage() + INVALID_DATE.getMessage());
         }
     }
 
     public boolean isVisitDateNonDigit(String visitDate) {
-        return Pattern.compile("\\D+").matcher(visitDate).matches();
+        return Pattern.compile(NON_DIGIT_REGEX.getRegex()).matcher(visitDate).matches();
     }
 
     public HashMap<String, Integer> convertStringToCollection(String menuAndCount) {
-        Pattern pattern = Pattern.compile("([가-힣]+)-(\\d+)");
+        Pattern pattern = Pattern.compile(MENU_AND_COUNT_REGEX.getRegex());
         Matcher matcher = pattern.matcher(menuAndCount);
         while (matcher.find()) {
             String menuName = matcher.group(1);
@@ -40,7 +52,7 @@ public class OrderService {
             if (map.containsKey(menuName)) {
                 isDuplicateName = true;
             }
-            if (menuCount < 1) {
+            if (menuCount < MINIMUM_COUNT.getValue()) {
                 isZeroValue = true;
             }
             map.put(menuName, menuCount);
@@ -49,27 +61,27 @@ public class OrderService {
     }
 
     public void validateMenuAndCount(String menuAndCount) {
-        HashSet<String> set = new HashSet<>(List.of(menuAndCount.split(",")));
+        HashSet<String> set = new HashSet<>(List.of(menuAndCount.split(MENU_AND_COUNT_REGEX.getRegex())));
         if (map.isEmpty()) {
-            throw new IllegalArgumentException("유효하지 않은 주문입니다. 다시 입력해 주세요.");
+            throw new IllegalArgumentException(EXCEPTION_PREFIX.getMessage() + INVALID_ORDER.getMessage());
         }
         if (map.size() != set.size()) {
-            throw new IllegalArgumentException("유효하지 않은 주문입니다. 다시 입력해 주세요.");
+            throw new IllegalArgumentException(EXCEPTION_PREFIX.getMessage() + INVALID_ORDER.getMessage());
         }
         if (isDuplicateName) {
-            throw new IllegalArgumentException("유효하지 않은 주문입니다. 다시 입력해 주세요.");
+            throw new IllegalArgumentException(EXCEPTION_PREFIX.getMessage() + INVALID_ORDER.getMessage());
         }
         if (isZeroValue) {
-            throw new IllegalArgumentException("유효하지 않은 주문입니다. 다시 입력해 주세요.");
+            throw new IllegalArgumentException(EXCEPTION_PREFIX.getMessage() + INVALID_ORDER.getMessage());
         }
         if (isMenuNotExists()) {
-            throw new IllegalArgumentException("유효하지 않은 주문입니다. 다시 입력해 주세요.");
+            throw new IllegalArgumentException(EXCEPTION_PREFIX.getMessage() + INVALID_ORDER.getMessage());
         }
         if (isOrderOnlyBeverage()) {
-            throw new IllegalArgumentException("유효하지 않은 주문입니다. 다시 입력해 주세요.");
+            throw new IllegalArgumentException(EXCEPTION_PREFIX.getMessage() + INVALID_ORDER.getMessage());
         }
         if (isOrderCountOverTwenty()) {
-            throw new IllegalArgumentException("유효하지 않은 주문입니다. 다시 입력해 주세요.");
+            throw new IllegalArgumentException(EXCEPTION_PREFIX.getMessage() + INVALID_ORDER.getMessage());
         }
     }
 
@@ -85,7 +97,7 @@ public class OrderService {
         int count = map.values().stream()
                 .mapToInt(Integer::intValue)
                 .sum();
-        return count > 20;
+        return count > MAXIMUM_COUNT.getValue();
     }
 
     public void calculateTotal(HashMap<String, Integer> map) {
@@ -100,6 +112,6 @@ public class OrderService {
     }
 
     public boolean isChampagneProvided(int total) {
-        return total >= 120_000;
+        return total >= GIFT_EVENT_AMOUNT.getValue();
     }
 }

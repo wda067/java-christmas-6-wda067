@@ -1,63 +1,77 @@
 package christmas.view;
 
+import static christmas.constants.Message.OUTPUT_AMOUNT_UNIT;
+import static christmas.constants.Message.OUTPUT_BENEFIT_DETAILS_MESSAGE;
+import static christmas.constants.Message.OUTPUT_BLANK;
+import static christmas.constants.Message.OUTPUT_EVENT_BADGE_MESSAGE;
+import static christmas.constants.Message.OUTPUT_GIFT_MENU_MESSAGE;
+import static christmas.constants.Message.OUTPUT_NOTHING_MESSAGE;
+import static christmas.constants.Message.OUTPUT_ONE_CHAMPAGNE;
+import static christmas.constants.Message.OUTPUT_ORDER_MENU_MESSAGE;
+import static christmas.constants.Message.OUTPUT_OVERVIEW_MESSAGE;
+import static christmas.constants.Message.OUTPUT_QUANTITY_UNIT;
+import static christmas.constants.Message.OUTPUT_TOTAL_AFTER_DISCOUNT_MESSAGE;
+import static christmas.constants.Message.OUTPUT_TOTAL_BEFORE_DISCOUNT_MESSAGE;
+import static christmas.constants.Message.OUTPUT_TOTAL_BENEFIT_AMOUNT_MESSAGE;
+import static christmas.constants.Message.OUTPUT_WELCOME_MESSAGE;
 import static christmas.util.NumberFormatter.formatNumber;
 
 import java.util.HashMap;
-import java.util.Map.Entry;
 
 public class OutputView {
 
     public void printWelcomeMessage() {
-        System.out.println("안녕하세요! 우테코 식당 12월 이벤트 플래너입니다.");
+        System.out.println(OUTPUT_WELCOME_MESSAGE.getMessage());
     }
 
     public void printOverviewMessage(int day) {
-        System.out.printf("12월 %d일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!\n\n", day);
+        System.out.printf(OUTPUT_OVERVIEW_MESSAGE.getMessage(), day);
     }
 
     public void printOrderMenu(HashMap<String, Integer> orderMenu) {
-        System.out.println("<주문 메뉴>");
+        System.out.println(OUTPUT_ORDER_MENU_MESSAGE.getMessage());
         orderMenu.forEach((menu, count) ->
-                System.out.println(menu + " " + count + "개"));
+                System.out.println(menu + OUTPUT_BLANK.getMessage() +
+                        count + OUTPUT_QUANTITY_UNIT.getMessage()));
     }
 
     public void printTotalOrderAmountBeforeDiscount(String price) {
-        System.out.println("\n<할인 전 총주문 금액>");
-        System.out.println(price + "원");
+        System.out.println(OUTPUT_TOTAL_BEFORE_DISCOUNT_MESSAGE.getMessage());
+        System.out.println(price + OUTPUT_AMOUNT_UNIT.getMessage());
     }
 
     public void printGiftMenu(boolean isProvided) {
-        System.out.println("\n<증정 메뉴>");
+        System.out.println(OUTPUT_GIFT_MENU_MESSAGE.getMessage());
         if (isProvided) {
-            System.out.println("샴페인 1개");
+            System.out.println(OUTPUT_ONE_CHAMPAGNE.getMessage());
         }
         if (!isProvided) {
-            System.out.println("없음");
+            System.out.println(OUTPUT_NOTHING_MESSAGE.getMessage());
         }
     }
 
     public void printBenefitDetails(HashMap<String, Integer> benefitDetails) {
-        System.out.println("\n<혜택 내역>");
+        System.out.println(OUTPUT_BENEFIT_DETAILS_MESSAGE.getMessage());
         if (benefitDetails.isEmpty()) {
-            System.out.println("없음");
+            System.out.println(OUTPUT_NOTHING_MESSAGE.getMessage());
             return;
         }
         benefitDetails.forEach((event, discount) ->
-                System.out.println(event + formatNumber(discount) + "원"));
+                System.out.println(event + formatNumber(discount) + OUTPUT_AMOUNT_UNIT.getMessage()));
     }
 
     public void printTotalBenefitAmount(int amount) {
-        System.out.println("\n<총혜택 금액>");
-        System.out.println(formatNumber(amount) + "원");
+        System.out.println(OUTPUT_TOTAL_BENEFIT_AMOUNT_MESSAGE.getMessage());
+        System.out.println(formatNumber(amount) + OUTPUT_AMOUNT_UNIT.getMessage());
     }
 
     public void printExpectedTotalAfterDiscount(int total, int discount) {
-        System.out.println("\n<할인 후 예상 결제 금액>");
-        System.out.println(formatNumber(total + discount) + "원");
+        System.out.println(OUTPUT_TOTAL_AFTER_DISCOUNT_MESSAGE.getMessage());
+        System.out.println(formatNumber(total + discount) + OUTPUT_AMOUNT_UNIT.getMessage());
     }
 
     public void printEventBadge(String badge) {
-        System.out.println("\n<12월 이벤트 배지>");
+        System.out.println(OUTPUT_EVENT_BADGE_MESSAGE.getMessage());
         System.out.print(badge);
     }
 }
