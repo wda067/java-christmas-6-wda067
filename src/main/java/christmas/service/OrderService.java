@@ -12,7 +12,7 @@ import static christmas.constants.Regex.COMMA_REGEX;
 import static christmas.constants.Regex.MENU_AND_COUNT_REGEX;
 import static christmas.constants.Regex.NON_DIGIT_REGEX;
 
-import christmas.model.Menu;
+import christmas.constants.Menu;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;

@@ -22,7 +22,7 @@ import static christmas.constants.NumberEnum.TREE_BADGE_DISCOUNT_AMOUNT;
 import static christmas.constants.NumberEnum.ZERO_VALUE;
 import static java.time.Month.DECEMBER;
 
-import christmas.model.Menu;
+import christmas.constants.Menu;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.HashMap;

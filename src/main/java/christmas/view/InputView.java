@@ -8,8 +8,7 @@ import static christmas.constants.Message.OUTPUT_WELCOME_MESSAGE;
 import static christmas.util.NumberFormatter.formatNumber;
 
 import camp.nextstep.edu.missionutils.Console;
-import christmas.model.Menu;
-import christmas.util.NumberFormatter;
+import christmas.constants.Menu;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
