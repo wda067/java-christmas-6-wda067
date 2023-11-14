@@ -51,7 +51,7 @@ public class EventService {
         }
     }
 
-    public int calculateWeekdayDiscount(HashMap<String, Integer> orderMenu) {
+    private int calculateWeekdayDiscount(HashMap<String, Integer> orderMenu) {
         long dessertCount = orderMenu.keySet().stream()
                 .filter(name -> Menu.getDessertList().contains(name))
                 .mapToInt(orderMenu::get)
@@ -59,7 +59,7 @@ public class EventService {
         return (int) (NEGATIVE_MULTIPLIER.getValue() * (dessertCount * DISCOUNT_PER_MENU.getValue()));
     }
 
-    public int calculateWeekendDiscount(HashMap<String, Integer> orderMenu) {
+    private int calculateWeekendDiscount(HashMap<String, Integer> orderMenu) {
         long mainCount = orderMenu.keySet().stream()
                 .filter(name -> Menu.getMainList().contains(name))
                 .mapToInt(orderMenu::get)
