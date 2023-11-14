@@ -43,11 +43,15 @@ public class EventService {
                                      HashMap<String, Integer> orderMenu) {
         if (isWeekend(visitDate)) {
             int discount = calculateWeekendDiscount(orderMenu);
-            benefitDetails.put(WEEKEND_EVENT.getEvent(), discount);
+            if (discount < ZERO_VALUE.getValue()) {
+                benefitDetails.put(WEEKEND_EVENT.getEvent(), discount);
+            }
         }
         if (!isWeekend(visitDate)) {
             int discount = calculateWeekdayDiscount(orderMenu);
-            benefitDetails.put(WEEKDAY_EVENT.getEvent(), discount);
+            if (discount < ZERO_VALUE.getValue()) {
+                benefitDetails.put(WEEKDAY_EVENT.getEvent(), discount);
+            }
         }
     }
 
