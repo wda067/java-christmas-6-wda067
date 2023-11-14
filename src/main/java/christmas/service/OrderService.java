@@ -67,12 +67,12 @@ public class OrderService {
         return orderedMenu;
     }
 
-    public void validateMenuAndCount(String menuAndCount) {
+    public void validateMenuAndCount(String menuAndCount, HashMap<String, Integer> orderedMenu) {
         HashSet<String> set = new HashSet<>(List.of(menuAndCount.split(COMMA_REGEX.getRegex())));
-        if (isIncorrectFormat()) {
+        if (isIncorrectFormat(orderedMenu)) {
             throw new IllegalArgumentException(EXCEPTION_PREFIX.getMessage() + INVALID_ORDER.getMessage());
         }
-        if (isDividedByComma(set)) {
+        if (isDividedByComma(set, orderedMenu)) {
             throw new IllegalArgumentException(EXCEPTION_PREFIX.getMessage() + INVALID_ORDER.getMessage());
         }
         if (isDuplicateName) {
@@ -81,34 +81,34 @@ public class OrderService {
         if (isCountZeroValue) {
             throw new IllegalArgumentException(EXCEPTION_PREFIX.getMessage() + INVALID_ORDER.getMessage());
         }
-        if (isMenuNotExists()) {
+        if (isMenuNotExists(orderedMenu)) {
             throw new IllegalArgumentException(EXCEPTION_PREFIX.getMessage() + INVALID_ORDER.getMessage());
         }
-        if (isOrderOnlyBeverage()) {
+        if (isOrderOnlyBeverage(orderedMenu)) {
             throw new IllegalArgumentException(EXCEPTION_PREFIX.getMessage() + INVALID_ORDER.getMessage());
         }
-        if (isOrderCountOverTwenty()) {
+        if (isOrderCountOverTwenty(orderedMenu)) {
             throw new IllegalArgumentException(EXCEPTION_PREFIX.getMessage() + INVALID_ORDER.getMessage());
         }
     }
 
-    private boolean isIncorrectFormat() {
+    private boolean isIncorrectFormat(HashMap<String, Integer> orderedMenu) {
         return orderedMenu.isEmpty();
     }
 
-    private boolean isDividedByComma(HashSet<String> set) {
+    private boolean isDividedByComma(HashSet<String> set, HashMap<String, Integer> orderedMenu) {
         return orderedMenu.size() != set.size();
     }
 
-    private boolean isMenuNotExists() {
+    private boolean isMenuNotExists(HashMap<String, Integer> orderedMenu) {
         return !new HashSet<>(Menu.getNameList()).containsAll(orderedMenu.keySet());
     }
 
-    private boolean isOrderOnlyBeverage() {
+    private boolean isOrderOnlyBeverage(HashMap<String, Integer> orderedMenu) {
         return new HashSet<>(Menu.getBeverageList()).containsAll(orderedMenu.keySet());
     }
 
-    private boolean isOrderCountOverTwenty() {
+    private boolean isOrderCountOverTwenty(HashMap<String, Integer> orderedMenu) {
         int count = orderedMenu.values().stream()
                 .mapToInt(Integer::intValue)
                 .sum();
