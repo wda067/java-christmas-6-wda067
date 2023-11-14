@@ -47,6 +47,10 @@ public class ChristmasController {
     public void inputVisitDate() {
         inputView.printWelcomeMessage();
         inputView.printInputVisitDateMessage();
+        handleInvalidVisitDate();
+    }
+
+    private void handleInvalidVisitDate() {
         while (true) {
             try {
                 visitDate = inputView.inputVisitDate();
@@ -62,6 +66,10 @@ public class ChristmasController {
         inputView.printMenuTable();
         inputView.printEventNotice();
         inputView.printInputMenuAndCountMessage();
+        handleInvalidMenuAndCount();
+    }
+
+    private void handleInvalidMenuAndCount() {
         while (true) {
             try {
                 String menuAndCount = inputView.inputMenuAndCount();
