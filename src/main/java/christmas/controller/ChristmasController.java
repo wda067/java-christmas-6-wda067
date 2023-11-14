@@ -75,7 +75,7 @@ public class ChristmasController {
                 String menuAndCount = inputView.inputMenuAndCount();
                 orderService.initializeVariables();
                 order = new Order(orderService.convertStringToCollection(menuAndCount));
-                orderService.validateMenuAndCount(menuAndCount);
+                orderService.validateMenuAndCount(menuAndCount, order.map());
                 break;
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
