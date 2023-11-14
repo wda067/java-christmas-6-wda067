@@ -3,10 +3,10 @@ package christmas.controller;
 import static christmas.constants.Event.CHRISTMAS_EVENT;
 import static christmas.constants.Event.GIFT_EVENT;
 import static christmas.constants.Event.SPECIAL_EVENT;
+import static christmas.constants.Menu.CHAMPAGNE;
 import static christmas.constants.NumberEnum.MINIMUM_EVENT_AMOUNT;
 import static christmas.constants.NumberEnum.NEGATIVE_MULTIPLIER;
 import static christmas.constants.NumberEnum.ZERO_VALUE;
-import static christmas.constants.Menu.CHAMPAGNE;
 
 import christmas.model.Order;
 import christmas.service.EventService;
