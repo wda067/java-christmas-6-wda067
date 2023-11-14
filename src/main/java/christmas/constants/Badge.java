@@ -1,7 +1,6 @@
 package christmas.constants;
 
 public enum Badge {
-
     SANTA_BADGE("산타"),
     TREE_BADGE("트리"),
     STAR_BADGE("별"),
