@@ -38,12 +38,11 @@ public class OutputView {
 
     public void printGiftMenu(boolean isProvided) {
         System.out.println(OUTPUT_GIFT_MENU_MESSAGE.getMessage());
+        String giftMenu = OUTPUT_NOTHING_MESSAGE.getMessage();
         if (isProvided) {
-            System.out.println(OUTPUT_ONE_CHAMPAGNE.getMessage());
+            giftMenu = OUTPUT_ONE_CHAMPAGNE.getMessage();
         }
-        if (!isProvided) {
-            System.out.println(OUTPUT_NOTHING_MESSAGE.getMessage());
-        }
+        System.out.println(giftMenu);
     }
 
     public void printBenefitDetails(HashMap<String, Integer> benefitDetails) {
