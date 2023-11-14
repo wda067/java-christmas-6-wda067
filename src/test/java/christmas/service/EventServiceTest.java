@@ -6,7 +6,6 @@ import static christmas.constants.Badge.STAR_BADGE;
 import static christmas.constants.Badge.TREE_BADGE;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import christmas.constants.Event;
 import christmas.model.Order;
 import java.util.HashMap;
 import org.junit.jupiter.api.BeforeEach;
@@ -23,6 +22,7 @@ class EventServiceTest {
     void seuUp() {
         eventService = new EventService();
         orderService = new OrderService();
+        orderService.initializeVariables();
         order = new Order(orderService.convertStringToCollection("티본스테이크-1,바비큐립-1,초코케이크-1,제로콜라-1"));
     }
 
