@@ -36,7 +36,7 @@ public class OrderService {
     }
 
     private boolean isVisitDateNonDigit(String visitDate) {
-        return Pattern.compile(NON_DIGIT_REGEX.getRegex()).matcher(visitDate).matches();
+        return Pattern.compile(NON_DIGIT_REGEX.getRegex()).matcher(visitDate).find();
     }
 
     private boolean isVisitDateWrongRange(String visitDate) {
